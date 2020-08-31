@@ -1,0 +1,97 @@
+<div class="loading" *ngIf="!timer">
+    <img src="../../../assets/images-and-gifs/shopping-loading.gif">
+</div>
+<div *ngIf="timer">
+    <div class="homeHeader">
+        <h3>Shipping now available throughout Israel</h3>
+        <h6>Ships within a minimum of 3 business days from order placement</h6>
+    </div>
+    <div class="productSection">
+        <div class="productNavBar">
+            <mat-form-field class="searchFiled">
+                <mat-label>Search Product</mat-label>
+                <input type="text" matInput (input)="searchItem($event.target.value)">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Select Category</mat-label>
+                <mat-select name="productCategory" multiple (valueChange)="pickCategories($event)">
+                    <mat-option value=''>Select Category</mat-option>
+                    <mat-option *ngFor="let category of categories.categories" [value]="category._id">
+                        {{category.categoryName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="this.searchedProducts.length === 0 
+        && this.itemsPickedByCategory.length === 0">
+            <div class="product" *ngFor="let product of products">
+                <div class="productImages" style="background-image: url(http://localhost:3000/uploads/{{product.productImg}});"></div>
+                <p>{{product.productName}}</p>
+                <br>
+                <p>{{product.productDescription}}</p>
+                <div class="addAndPriceMenu">
+                    <span class="productPrice">{{product.productPrice}} &#8362;</span>
+                    <br>
+                    <button class="addButton" (click)="openDialogAddItem(product._id,product.productPrice)" mat-button><mat-icon>add</mat-icon></button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="this.searchedProducts.length > 0">
+            <div class="product" *ngFor="let product of searchedProducts">
+                <div class="productImages" style="background-image: url(http://localhost:3000/uploads/{{product.productImg}});"></div>
+                <p>{{product.productName}}</p>
+                <br>
+                <p>{{product.productDescription}}</p>
+                <div class="addAndPriceMenu">
+                    <span class="productPrice">{{product.productPrice}} &#8362;</span>
+                    <br>
+                    <button class="addButton" (click)="openDialogAddItem(product._id,product.productPrice)" mat-button><mat-icon>add</mat-icon></button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="this.searchedProducts.length === 0">
+            <div class="product" *ngFor="let product of itemsPickedByCategory">
+                <div class="productImages" style="background-image: url(http://localhost:3000/uploads/{{product.productImg}});"></div>
+                <p>{{product.productName}}</p>
+                <br>
+                <p>{{product.productDescription}}</p>
+                <div class="addAndPriceMenu">
+                    <span class="productPrice">{{product.productPrice}} &#8362;</span>
+                    <br>
+                    <button class="addButton" (click)="openDialogAddItem(product._id,product.productPrice)" mat-button><mat-icon>add</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cartSection" [ngClass]="menuOpen? 'menuOpen':'menuClosed'">
+        <h3>- Items In Cart - </h3>
+        <br>
+        <div class="itemContainer">
+            <div class="item" *ngFor="let item of cartItems">
+                <div class="itemImage" style="background-image: url(http://localhost:3000/uploads/{{item.productId.productImg}});"></div>
+                <div class="ItemInfo">
+                    <p>{{item.productId.productName}}</p>
+                    <p class="itemAmount">Amount - {{item.amount}}</p>
+                    <br>
+                    <p>{{item.totalPrice}} &#8362;</p>
+                </div>
+                <button class="removeButt" mat-button (click)="removeItemFromCart(item._id,item.totalPrice)">Remove<mat-icon>close</mat-icon></button>
+                <br>
+            </div>
+        </div>
+        <button class="removeCartButt" *ngIf="this.cart" mat-button (click)="removeCart()">
+            Delete Cart
+            <mat-icon>remove_shopping_cart</mat-icon>
+        </button>
+        <div class="total">
+            <span>|</span>
+            <h3>Total:{{totalPrice}} </h3>
+            <span>|</span>
+        </div>
+        <button class="orderCart" *ngIf="this.cart" mat-button>
+            <a class="cartLink" mat-button routerLink="/reviewOrder">Place Order</a>
+            <mat-icon>shopping_cart</mat-icon>
+        </button>
+    </div>
+    <button [ngClass]="menuOpen? 'menuButtonOpen':'menuButtonClose'" mat-button class="mobileItemMenuButton" (click)="openOrCloseMenu()"> &#10575; Items</button>
+</div>

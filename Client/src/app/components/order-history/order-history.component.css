@@ -1,0 +1,92 @@
+.orderList {
+    text-align: left;
+    width: 35%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+h2 {
+    margin-bottom: 75px;
+}
+
+.pickedOrder {
+    text-align: right;
+    width: 25%;
+    display: inline-block;
+    height: 700px;
+    background-color: #EDF5E1;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #05386B;
+}
+
+.pickedOrder>div>h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #05386B;
+}
+
+.enlargeOrder {
+    text-align: left;
+}
+
+.pickedTotal {
+    position: absolute;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 20px;
+    bottom: 0px;
+}
+
+.receiptButt {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.noOrder {
+    text-align: center;
+    margin-top: 50%;
+}
+
+.enlargeOrder>p {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 15px;
+}
+
+.order {
+    background-color: #379683b7;
+    display: inline-block;
+    padding: 30px;
+    margin: 10px;
+}
+
+.order>p {
+    color: #EDF5E1;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 20px;
+}
+
+.orderContainer {
+    padding: 50;
+    position: relative;
+    height: 690px;
+}
+
+.orderSwitch {
+    animation-name: switchOrder;
+    animation-duration: 1s;
+}
+
+@keyframes switchOrder {
+    from {
+        opacity: 0;
+        padding: 75px;
+    }
+    to {
+        opacity: 1;
+        padding: 0px;
+    }
+}

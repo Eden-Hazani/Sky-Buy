@@ -1,0 +1,71 @@
+<div class="loading" *ngIf="!timer">
+    <img src="../../../assets/images-and-gifs/shopping-loading.gif">
+</div>
+
+<div *ngIf="timer">
+    <div class="orderContainer">
+        <h3>Review Your Order</h3>
+        <div class="product" *ngFor="let product of orderedProducts">
+            <div class="productImages" style="background-image: url(http://localhost:3000/uploads/{{product.productId.productImg}});"></div>
+            <p class="pName">{{product.productId.productName}}</p>
+            <br>
+            <p class="pDescription">{{product.productId.productDescription}}</p>
+            <p class="pAmount">Amount: {{product.amount}}</p>
+            <span>{{product.totalPrice}} &#8362;</span>
+        </div>
+    </div>
+    <form class="OrderDetails" (ngSubmit)="submitOrder()">
+        <h3>Please Enter shipping details and payment information</h3>
+        <mat-form-field appearance="fill">
+            <mat-label>Select City</mat-label>
+            <mat-select [(ngModel)]="order.addressCity" name="city" [formControl]="addressCityFormControl" [errorStateMatcher]="matcher" required>
+                <mat-option *ngFor="let city of this.cities.result.records" [value]="city.Name">
+                    {{city.Name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressCityFormControl.hasError('required')">
+                City Is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" style="margin-left: 10px;">
+            <mat-label>Enter Street Name</mat-label>
+            <input [(ngModel)]="order.addressStreet" required type="text" matInput [formControl]="addressStreetFormControl" [errorStateMatcher]="matcher" name="street" placeholder="Ex. rothschild boulevard">
+            <mat-error *ngIf="addressStreetFormControl.hasError('minlength')">
+                Name Must be 3 characters or more.
+            </mat-error>
+            <mat-error *ngIf="addressStreetFormControl.hasError('required')">
+                Last name is required.
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <mat-form-field>
+            <input matInput [matDatepicker]="expiration1" placeholder="Shipping Date" [formControl]="shippingDateFormControl" [errorStateMatcher]="matcher" required (dateChange)="shipDateChange($event.value)">
+            <mat-datepicker-toggle matSuffix [for]="expiration1"></mat-datepicker-toggle>
+            <mat-datepicker #expiration1></mat-datepicker>
+        </mat-form-field>
+        <mat-error *ngIf="shippingDateFormControl.hasError('error')">
+            Cannot be today or past date.
+        </mat-error>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Enter Credit Card</mat-label>
+            <input (input)="insertCredit($event.target.value)" required matInput [formControl]="creditCardFormControl" [errorStateMatcher]="matcher" type="number" inputmode="numeric" autocomplete="cc-number" placeholder="xxxx xxxx xxxx xxxx">
+        </mat-form-field>
+        <mat-error *ngIf="creditCardFormControl.hasError('minlength')">
+            Invalid Credit card number
+        </mat-error>
+        <mat-error *ngIf="creditCardFormControl.hasError('maxlength')">
+            Invalid Credit card number
+        </mat-error>
+        <mat-error *ngIf="creditCardFormControl.hasError('pattern')">
+            Invalid Credit card number
+        </mat-error>
+        <br>
+        <button mat-button type="submit" class="sendOrder">Send Order</button>
+
+
+        <h3>Total To Pay - {{totalPrice}} &#8362;</h3>
+    </form>
+
+</div>

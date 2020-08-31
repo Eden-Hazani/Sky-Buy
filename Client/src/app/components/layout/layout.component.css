@@ -1,0 +1,125 @@
+h1,
+h3 {
+    margin: auto;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+h1 {
+    font-size: 35px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: black;
+}
+
+.displayedUsername {
+    margin-right: 10px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.logo {
+    background-image: url('/assets/images-and-gifs/SiteLogo.png');
+    width: 180px;
+    height: 100px;
+    background-size: 170px;
+    margin-bottom: 55px;
+    display: block;
+}
+
+.siteInfo {
+    margin-left: 65%;
+}
+
+h1>a,
+h3>a {
+    color: #05386B;
+}
+
+.mat-toolbar {
+    background-color: rgba(250, 235, 215, 0.185);
+}
+
+a {
+    text-decoration: none;
+}
+
+.menuBarMobile {
+    display: none;
+}
+
+.menuIcon {
+    font-size: 40px;
+}
+
+::ng-deep .mat-menu-panel {
+    padding: 0 10px!important;
+    width: 500px !important;
+}
+
+.mobileTitle {
+    display: none;
+    margin-top: 20px;
+    margin-bottom: 70px;
+}
+
+.desktopLogout {
+    background-color: #05386bbd !important;
+    padding: 5px;
+    padding-right: 15px;
+    padding-left: 10px;
+    border-radius: 25px;
+    border: none;
+    color: #8EE4AF !important;
+    display: inline-block;
+}
+
+.instagramLogo {
+    display: inline-block;
+    background-image: url(/assets/images-and-gifs/instegram-logo.png);
+    width: 35px;
+    height: 35px;
+    background-size: 35px;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+.facebookLogo {
+    display: inline-block;
+    background-image: url(/assets/images-and-gifs/facebook-logo.png);
+    width: 40px;
+    height: 38px;
+    background-size: 40px;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+.desktopLogout:hover {
+    cursor: pointer;
+}
+
+.desktopLogout>* {
+    display: inline;
+    vertical-align: middle;
+}
+
+.menuBarDesktop {
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 600px) {
+    .menuBarMobile {
+        display: inline-block;
+        position: fixed;
+        left: 0px;
+        top: 10px;
+    }
+    .menuBarDesktop {
+        display: none;
+    }
+    .mobileTitle {
+        display: inline-block;
+    }
+    .desktopLogout {
+        display: none;
+    }
+}

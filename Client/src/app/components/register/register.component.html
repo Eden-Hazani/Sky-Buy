@@ -1,0 +1,132 @@
+<div class="loading" *ngIf="!this.startTimer">
+    <img src="../../../assets/images-and-gifs/shopping-loading.gif">
+</div>
+
+<form class="example-form" (ngSubmit)="register()" *ngIf="this.startTimer">
+    <h1>Welcome To SkyBuy</h1>
+    <h2>Please fill out the registration form below to create a new user</h2>
+    <div class="firstStage" *ngIf="!secondStage">
+        <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input type="text" name="usernameEmail" matInput [formControl]="usernameFormControl" [errorStateMatcher]="matcher" placeholder="Ex. John12@example.com" [(ngModel)]="newUser.usernameEmail">
+            <mat-error *ngIf="usernameFormControl.hasError('pattern')">
+                Illegal email address
+            </mat-error>
+            <mat-error *ngIf="usernameFormControl.hasError('required')">
+                Username is required
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" autocomplete="on" name="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" placeholder="Must be a strong password" [(ngModel)]="newUser.password">
+            <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+                Password must be above 5 characters
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+                Password cannot be above 12 characters
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+                Must contain - Two uppercase letters, three lowercase letters and two numbers.
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Password is required
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Repeat Password</mat-label>
+            <input type="password" autocomplete="on" name="password" matInput [formControl]="confirmPassFormControl" [errorStateMatcher]="matcher" placeholder="Must Match Password">
+            <mat-error *ngIf="confirmPassFormControl.hasError('required')">
+                Password is required
+            </mat-error>
+            <mat-error *ngIf="confirmPassFormControl.hasError('error')">
+                Passwords Do Not Match
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Identification Number</mat-label>
+            <input type="number" matInput [formControl]="IdentificationNumberFormControl" name="IdentificationNumber" [errorStateMatcher]="matcher" placeholder="Ex. 123456789" [(ngModel)]="newUser.IdentificationNumber">
+            <mat-error *ngIf="IdentificationNumberFormControl.hasError('minlength')">
+                Illegal ID
+            </mat-error>
+            <mat-error *ngIf="IdentificationNumberFormControl.hasError('maxlength')">
+                Illegal ID
+            </mat-error>
+            <mat-error *ngIf="IdentificationNumberFormControl.hasError('required')">
+                ID is required.
+            </mat-error>
+            <mat-error *ngIf="IdentificationNumberFormControl.hasError('min')">
+                Illegal ID
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <button mat-button (click)="validateFirstStage()">Next</button>
+    </div>
+    <div class="secondStage" *ngIf="secondStage">
+        <mat-form-field class="example-full-width">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput [formControl]="firstNameFormControl" name="firstName" [errorStateMatcher]="matcher" placeholder="Ex. John" [(ngModel)]="newUser.firstName">
+            <mat-error *ngIf="firstNameFormControl.hasError('minlength')">
+                Name Must be 3 characters or more.
+            </mat-error>
+            <mat-error *ngIf="firstNameFormControl.hasError('pattern')">
+                Name Must start with a capital letter.
+            </mat-error>
+            <mat-error *ngIf="firstNameFormControl.hasError('required')">
+                First name is required.
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput [formControl]="lastNameFormControl" [errorStateMatcher]="matcher" name="lastName" placeholder="Ex. Shelby" [(ngModel)]="newUser.lastName">
+            <mat-error *ngIf="lastNameFormControl.hasError('minlength')">
+                Name Must be 3 characters or more.
+            </mat-error>
+            <mat-error *ngIf="lastNameFormControl.hasError('required')">
+                Last name is required.
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Select City</mat-label>
+            <mat-select [(value)]="preSelected" [(ngModel)]="newUser.address.city" name="city" [formControl]="addressCityFormControl" [errorStateMatcher]="matcher" required>
+                <mat-option value=''>Select City</mat-option>
+                <mat-option *ngFor="let city of this.cities.result.records" [value]="city.Name">
+                    {{city.Name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressCityFormControl.hasError('required')">
+                City Is required
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+            <mat-label>Street</mat-label>
+            <input type="text" matInput [formControl]="addressStreetFormControl" name="street" [errorStateMatcher]="matcher" placeholder="Ex. Samson Hgibor 41" [(ngModel)]="newUser.address.street">
+            <mat-error *ngIf="addressStreetFormControl.hasError('required')">
+                Street is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Zip Number</mat-label>
+            <input type="text" matInput [formControl]="ZipFormControl" name="street" [errorStateMatcher]="matcher" placeholder="12345" [(ngModel)]="newUser.address.zip">
+            <mat-error *ngIf="ZipFormControl.hasError('required')">
+                Zip is required
+            </mat-error>
+            <mat-error *ngIf="ZipFormControl.hasError('min')">
+                Illegal zip
+            </mat-error>
+            <mat-error *ngIf="ZipFormControl.hasError('minlength')">
+                Illegal zip
+            </mat-error>
+        </mat-form-field>
+        <br><br>
+        <button type="submit" mat-button class="register">Register</button>
+    </div>
+    <br><br>
+    <p>Already a user?</p>
+    <a mat-button routerLink="/login" class="login">Login!</a>
+</form>

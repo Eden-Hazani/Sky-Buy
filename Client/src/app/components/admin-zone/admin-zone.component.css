@@ -1,0 +1,47 @@
+.loading>* {
+    margin-top: 20%;
+    width: 150px;
+}
+
+.addButton {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.product {
+    overflow: hidden;
+    width: 300px;
+    height: 320px;
+    min-height: 200px;
+    display: inline-block;
+    margin: 15px;
+    background-color: rgba(131, 131, 131, 0.151);
+    border-radius: 25px;
+    border: 1px solid black;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.product>button {
+    margin: 5px;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.addCategory {
+    background-color: rgba(131, 131, 131, 0.151);
+    width: 50%;
+    margin: auto;
+    padding: 25px;
+    border-radius: 40px;
+}
+
+.productImages {
+    width: 140px;
+    height: 120px;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: left;
+    border-radius: 30px;
+}

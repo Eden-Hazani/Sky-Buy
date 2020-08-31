@@ -1,0 +1,62 @@
+<div class="menuBarDesktop">
+    <mat-toolbar>
+
+        <a class="logo" routerLink="/home"></a>
+        <span *ngIf="isLogged()">|</span>
+        <h3 *ngIf="isLogged()"><a routerLink="/flashDeal">Flash Deals</a></h3>
+        <span *ngIf="isLogged() && adminAnswer">|</span>
+        <h3 *ngIf="isLogged() && adminAnswer"><a routerLink="/admin">Admin Zone</a></h3>
+        <span *ngIf="isLogged()">|</span>
+        <h3 *ngIf="isLogged()"><a routerLink="/orderHistory">Order History</a></h3>
+        <span *ngIf="isLogged()">|</span>
+        <h3 *ngIf="isLogged()"><a routerLink="/about">Our Story</a></h3>
+    </mat-toolbar>
+    <div class="siteInfo" *ngIf="isLogged()">
+        <span class="displayedUsername">Hello {{userInfo.firstName}}</span>
+        <button *ngIf="isLogged()" (click)="logout()" class="desktopLogout">
+        <mat-icon>exit_to_app</mat-icon>
+        <span><a>Logout</a></span>
+      </button>
+        <a href="#">
+            <div class="instagramLogo"></div>
+        </a>
+        <a href="#">
+            <div class="facebookLogo"></div>
+        </a>
+    </div>
+</div>
+
+<h1 class=mobileTitle>Sky Buy</h1>
+
+<button *ngIf="isLogged()" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menuBarMobile">
+    <mat-icon class="menuIcon">menu</mat-icon>
+  </button>
+<mat-menu class="menuSize" #menu="matMenu">
+    <button mat-menu-item>
+        <mat-icon>home</mat-icon>
+        <span><a routerLink="/home">Sky Buy</a></span>
+      </button>
+    <button mat-menu-item *ngIf="isLogged()">
+      <mat-icon>hotel</mat-icon>
+      <span><a routerLink="/flashDeals">Flash Deals</a></span>
+    </button>
+    <button mat-menu-item *ngIf="isLogged() && adminAnswer">
+      <mat-icon>lock_open</mat-icon>
+      <span><a routerLink="/admin">Admin Zone</a></span>
+    </button>
+    <button mat-menu-item *ngIf="isLogged()">
+      <mat-icon>book</mat-icon>
+      <span><a routerLink="/about">Our Story</a></span>
+    </button>
+    <button mat-menu-item *ngIf="isLogged()">
+      <mat-icon>location_on</mat-icon>
+      <span><a routerLink="/orderHistory">Order history</a></span>
+    </button>
+    <button mat-menu-item (click)="logout()" *ngIf="isLogged()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span><a routerLink="/about">Logout</a></span>
+    </button>
+</mat-menu>
+
+
+<router-outlet></router-outlet>

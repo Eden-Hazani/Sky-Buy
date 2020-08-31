@@ -1,0 +1,75 @@
+<div class="loading" *ngIf="!timer">
+    <img src="../../../assets/images-and-gifs/shopping-loading.gif">
+</div>
+<form class="example-form" (ngSubmit)="add()" *ngIf="this.timer">
+
+    <h2 mat-dialog-title>Modify Product</h2>
+    <mat-dialog-content class="mat-typography">
+        <mat-icon> local_grocery_store</mat-icon>
+        <mat-form-field class="example-full-width">
+            <mat-label>Product Name</mat-label>
+            <input type="text" name="productName" matInput [formControl]="productNameFormControl" [errorStateMatcher]="matcher" placeholder="Ex. Onion" [(ngModel)]="newProduct.productName">
+            <mat-error *ngIf="productNameFormControl.hasError('pattern')">
+                Cannot contain numbers
+            </mat-error>
+            <mat-error *ngIf="productNameFormControl.hasError('required')">
+                Name is required
+            </mat-error>
+            <mat-error *ngIf="productNameFormControl.hasError('minlength')">
+                Name must be above 3 characters
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-icon>description</mat-icon>
+        <mat-form-field class="example-full-width">
+            <mat-label>Description</mat-label>
+            <input type="text" name="productDescription" matInput [formControl]="descriptionFormControl" [errorStateMatcher]="matcher" placeholder="Ex. Sweet onions from Ramat hagolan" [(ngModel)]="newProduct.productDescription">
+            <mat-error *ngIf="descriptionFormControl.hasError('required')">
+                Description is required
+            </mat-error>
+            <mat-error *ngIf="descriptionFormControl.hasError('minlength')">
+                Description must be at least 20 characters
+            </mat-error>
+            <mat-error *ngIf="descriptionFormControl.hasError('maxlength')">
+                Description cannot exceed 50 characters
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-icon>attach_money</mat-icon>
+        <mat-form-field class="example-full-width">
+            <mat-label>Price</mat-label>
+            <input type="number" name="productPrice" matInput [formControl]="priceFormControl" [errorStateMatcher]="matcher" placeholder="Ex. 15" [(ngModel)]="newProduct.productPrice">
+            <mat-error *ngIf="priceFormControl.hasError('required')">
+                Price is required
+            </mat-error>
+            <mat-error *ngIf="priceFormControl.hasError('min')">
+                Illegal price
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Select Category</mat-label>
+            <mat-select [(value)]="preSelected" [(ngModel)]="newProduct.categoryId" name="productCategory" [formControl]="categoryFormControl" [errorStateMatcher]="matcher" required>
+                <mat-option value=''>Select Category</mat-option>
+                <mat-option *ngFor="let category of categories.categories" [value]="category._id">
+                    {{category.categoryName}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="categoryFormControl.hasError('required')">
+                Category Is required
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-label>Upload Photo</mat-label>
+        <br>
+        <button mat-button><input type="file" id="file" (change)="handleFileInput($event.target.files)" name="productImage" accept="image/*" required/></button>
+
+    </mat-dialog-content>
+
+
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial type="submit">Add Product</button>
+    </mat-dialog-actions>
+
+</form>

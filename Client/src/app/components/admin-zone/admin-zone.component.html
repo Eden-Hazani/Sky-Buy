@@ -1,0 +1,49 @@
+<div class="loading" *ngIf="!timer">
+    <img src="../../../assets/images-and-gifs/shopping-loading.gif">
+</div>
+
+<div *ngIf="this.timer">
+    <h1>Welcome Admin</h1>
+
+    <button class="addButton" mat-button (click)="openDialogAdd()"><h1>Press Here to add a new product to the store</h1></button>
+    <br>
+    <div class="addCategory">
+        <h2>Add a new category</h2>
+        <br>
+        <form (ngSubmit)="submitCategory()">
+            <mat-dialog-content class="mat-typography">
+                <mat-icon> local_grocery_store</mat-icon>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Category Name</mat-label>
+                    <input type="text" name="productName" matInput [formControl]="categoryFormControl" [errorStateMatcher]="matcher" placeholder="Ex. Dairy" [(ngModel)]="newCategory.categoryName">
+                    <mat-error *ngIf="categoryFormControl.hasError('required')">
+                        Name is required
+                    </mat-error>
+                    <mat-error *ngIf="categoryFormControl.hasError('minlength')">
+                        Name must be above 3 characters
+                    </mat-error>
+                    <mat-error *ngIf="categoryFormControl.hasError('maxlength')">
+                        Name must be below 20 characters
+                    </mat-error>
+                </mat-form-field>
+            </mat-dialog-content>
+            <br>
+            <button mat-button>Submit Name</button>
+        </form>
+
+    </div>
+
+    <h1>Here you can choose an existing item in order to modify or delete it</h1>
+
+    <div class="product" *ngFor="let product of products">
+        <div class="productImages" style="background-image: url(http://localhost:3000/uploads/{{product.productImg}});"></div>
+        <p>{{product.productName}}</p>
+        <br>
+        <p>{{product.productDescription}}</p>
+        <span>{{product.productPrice}} &#8362;</span>
+        <br>
+        <button mat-button (click)="openDialogModify(product._id)">Modify Product</button>
+        <span>|</span>
+        <button mat-button (click)="deleteItem(product._id)">Delete Product</button>
+    </div>
+</div>

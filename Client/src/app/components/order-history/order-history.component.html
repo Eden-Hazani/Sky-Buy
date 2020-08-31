@@ -1,0 +1,24 @@
+<h2>Below you can see the your purchasing history.</h2>
+<div class="orderList">
+    <div class="order" *ngFor="let order of orders" (click)="openOrder(order)">
+        <p>Order Number: {{order._id}}</p>
+        <p>Order Date: {{order.orderCreationDate}}</p>
+        <br>
+        <p>Total payed: {{order.totalPrice}} &#8362;</p>
+        <p>Delivery Date: {{order.shippingDate}}</p>
+    </div>
+</div>
+
+<div class="pickedOrder">
+    <h2 class="noOrder" *ngIf="!pickedOrderItems">Click on one of the orders for a detailed info</h2>
+    <div class="orderContainer" *ngIf="pickedOrderItems" [ngClass]="orderSwitch?'orderSwitch':null">
+        <h2>Order Details</h2>
+        <div class="enlargeOrder" *ngFor="let item of pickedOrderItems">
+            <p style="margin-left: 10px;">- {{item.productId.productName}} </p>
+            <p>Amount: {{item.amount}}</p>
+            <p> - {{item.totalPrice}} &#8362;</p>
+        </div>
+        <div class="pickedTotal">Total: {{pickedOrder.totalPrice}} &#8362;</div>
+        <button class="receiptButt" mat-button (click)="getReceipt(pickedOrder)">Get Receipt</button>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+.loading>* {
+    margin-top: 20%;
+    width: 150px;
+}
+
+.product {
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    margin: 15px;
+    background-color: rgba(255, 255, 255, 0.801);
+    padding: 15px;
+    overflow: hidden;
+}
+
+.product>p {
+    margin: 0px;
+}
+
+.productImages {
+    width: 100px;
+    height: 80px;
+    margin: auto;
+    background-size: 80%;
+    background-position: center;
+    border-radius: 30px;
+    background-repeat: no-repeat;
+}
+
+.orderContainer {
+    width: 45%;
+    display: inline-block;
+    margin-right: 100%;
+}
+
+.OrderDetails {
+    width: 45%;
+    display: inline-block;
+    position: fixed;
+    top: 300px;
+    right: 20px;
+}
+
+.OrderDetails {
+    background-color: rgba(255, 255, 255, 0.774);
+    height: 500px;
+    padding-top: 50px;
+    border: solid 1px rgba(128, 128, 128, 0.089);
+}
+
+.OrderDetails>h3 {
+    margin-bottom: 60px;
+}
+
+.sendOrder {
+    border: solid black 1px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 1150px) {
+    .product {
+        position: relative;
+        overflow: hidden;
+        width: 360px;
+        height: 40px;
+        display: inline-block;
+        margin: 15px;
+        background-color: rgba(255, 255, 255, 0.801);
+        padding: 15px;
+        overflow: hidden;
+    }
+    .pName {
+        position: absolute;
+        top: 0px;
+        right: 65%;
+    }
+    .pDescription {
+        right: 35%;
+        top: 25px;
+        position: absolute;
+    }
+    .productImages {
+        width: 50px;
+        height: 50px;
+        background-size: 100%;
+        background-position: center;
+        border-radius: 30px;
+        background-repeat: no-repeat;
+        margin: 0px;
+    }
+    .pAmount {
+        position: absolute;
+        bottom: 0px;
+        right: 110px;
+    }
+    .product>span {
+        position: absolute;
+        bottom: 0px;
+        right: 10%;
+    }
+}

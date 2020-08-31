@@ -1,0 +1,25 @@
+<h3>Login</h3>
+
+
+<form class="example-form" (ngSubmit)="login()">
+    <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input type="email" autofocus [formControl]="usernameFormControl" [errorStateMatcher]="matcher" required matInput name='email' [(ngModel)]="user.usernameEmail">
+        <mat-error *ngIf="usernameFormControl.hasError('required')">
+            Username Is required
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input required [formControl]="passwordFormControl" [errorStateMatcher]="matcher" matInput type="password" name="password" autocomplete="on" [(ngModel)]="user.password">
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password Is required
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-button type="submit" class="login">Login</button>
+
+    <p>Not a user?</p>
+    <a mat-button routerLink="/register" class="register">Register!</a>
+</form>

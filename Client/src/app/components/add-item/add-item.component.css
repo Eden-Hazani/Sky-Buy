@@ -1,0 +1,13 @@
+.amountIcon {
+    position: absolute !important;
+    left: 10px !important;
+    top: -2px !important;
+}
+
+.itemForm {
+    position: relative;
+}
+
+span {
+    font-size: 15px;
+}
