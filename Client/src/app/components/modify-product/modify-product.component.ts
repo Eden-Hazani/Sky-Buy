@@ -36,6 +36,7 @@ fileToUpload: File = null;
   async modify(){
     try{
         this.product._id = this.data._id;
+        this.product.productImg = this.data.productImg;
         this.adminServices.modifyProduct(this.product,this.fileToUpload);
     }catch(err){
       console.log(err.message)

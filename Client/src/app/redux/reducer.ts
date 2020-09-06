@@ -11,6 +11,10 @@ export function reducer(currentState:AppState,action:Action):AppState{
             newState.token = action.payload.token
             localStorage.setItem("token",JSON.stringify(action.payload.token));
             break;
+        case ActionType.UpdateUserInfo:
+            newState.user = action.payload;
+            localStorage.setItem("userInfo",JSON.stringify(action.payload));
+            break;
 
         case ActionType.AddProduct:
             newState.products.push(action.payload.newProduct);
@@ -47,13 +51,11 @@ export function reducer(currentState:AppState,action:Action):AppState{
         
         case ActionType.AddItemToCart:
             newState.totalToPay = newState.totalToPay + action.payload.updatedCart.totalPrice;
-            sessionStorage.setItem('total',`${newState.totalToPay}`)
             newState.cartItems.push(action.payload.updatedCart);
             break;
             
         case ActionType.RemoveItemFromCart:
             newState.totalToPay = newState.totalToPay - action.payload.price
-            sessionStorage.setItem('total',`${newState.totalToPay}`)
             const itemIndex = newState.cartItems.findIndex(i => i._id === action.payload._id);
             newState.cartItems.splice(itemIndex, 1);
             break;
@@ -62,6 +64,7 @@ export function reducer(currentState:AppState,action:Action):AppState{
             sessionStorage.clear();
             newState.cart = null;
             newState.cartItems = [];
+            newState.totalToPay = 0;
             break;
 
         case ActionType.GetOrderInfo:

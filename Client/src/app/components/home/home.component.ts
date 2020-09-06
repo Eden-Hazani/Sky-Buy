@@ -8,9 +8,9 @@ import { CartItemModel } from 'src/app/models/cart-item-model';
 import { MatDialog } from '@angular/material/dialog';
 import {AddItemComponent} from '../add-item/add-item.component'
 import { AdminService } from 'src/app/services/admin.service';
-import { CategoryModel } from 'src/app/models/category-model';
 import { UserModel } from 'src/app/models/user-info';
-import { ActionType } from 'src/app/redux/actionType';
+import {baseUrl} from 'src/environments/environment'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit,OnDestroy {
   public userInfo = new UserModel();
   public totalPrice:number;
   public menuOpen:boolean;
+  public continueShopMess:string;
+  public firstLogin:string = localStorage.getItem('firstLogin');
+  public baseUrl = baseUrl;
 
   constructor(private adminServices:AdminService,private dialog: MatDialog,private userServices:UserService) { }
 
@@ -86,6 +89,12 @@ export class HomeComponent implements OnInit,OnDestroy {
     }
     this.userServices.checkIfCartExists().then(async()=>{
       if(this.cart !== null){
+        if(this.firstLogin === 'true'){
+          this.continueShopMess = 'showMess'
+          setTimeout(() => {
+            this.continueShopMess = 'hideMess'
+          }, 5000);
+        }
         if(this.cart.payedAndCompleted){
           await this.userServices.createCart().then(()=> {
             this.cart = store.getState().cart
@@ -114,20 +123,16 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.cartItems = store.getState().cartItems;
     this.userInfo = store.getState().user;
     this.getCartItems();
-    this.totalPrice = parseInt(sessionStorage.getItem('total'));
+    setTimeout(() => {
+      localStorage.setItem('firstLogin','false');
+    }, 5000);
   }
 
   //if the cart drops to zero products it auto deletes, when the user selects a new product 
   //A new cart will be created
   public removeItemFromCart(item_id,totalPrice){
     const _id = this.cart._id;
-      this.userServices.removeFromCart(item_id,totalPrice);
-      setTimeout(() => {
-        if(this.cartItems.length === 0){
-         this.userServices.removeCart(_id)
-         store.dispatch({ type: ActionType.RemoveCart});
-        }
-      }, 1500);
+      this.userServices.removeFromCart(item_id,totalPrice,this.cart._id);
   }
 
   public removeCart(){
@@ -140,12 +145,17 @@ export class HomeComponent implements OnInit,OnDestroy {
       if(this.cart === null){
         await this.userServices.createCart().then(()=> this.cart = store.getState().cart);
       }
-      this.dialog.open(AddItemComponent,{
+      const addItem = this.dialog.open(AddItemComponent,{
         data:{
           product_id:product_id,
           cart_id:this.cart._id,
           productPrice:productPrice
           }
+      });
+      return addItem.afterClosed().subscribe(()=>{
+        if(this.cartItems.length === 0){
+          this.userServices.removeCart(this.cart._id)
+        }
       });
     }catch(err){
       console.log(err.message)

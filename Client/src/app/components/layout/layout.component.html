@@ -2,16 +2,19 @@
     <mat-toolbar>
 
         <a class="logo" routerLink="/home"></a>
-        <span *ngIf="isLogged()">|</span>
-        <h3 *ngIf="isLogged()"><a routerLink="/flashDeal">Flash Deals</a></h3>
         <span *ngIf="isLogged() && adminAnswer">|</span>
         <h3 *ngIf="isLogged() && adminAnswer"><a routerLink="/admin">Admin Zone</a></h3>
         <span *ngIf="isLogged()">|</span>
         <h3 *ngIf="isLogged()"><a routerLink="/orderHistory">Order History</a></h3>
         <span *ngIf="isLogged()">|</span>
         <h3 *ngIf="isLogged()"><a routerLink="/about">Our Story</a></h3>
+        <span *ngIf="isLogged()">|</span>
+        <h3 *ngIf="isLogged()"><a routerLink="/account">My Account</a></h3>
     </mat-toolbar>
     <div class="siteInfo" *ngIf="isLogged()">
+        <div class="imgCont" *ngIf="userInfo.profileImg !== 'noImageEntered'">
+            <div class="profileImg" style="background-image: url({{baseUrl}}uploads/profile-imgs/{{userInfo.profileImg}});"></div>
+        </div>
         <span class="displayedUsername">Hello {{userInfo.firstName}}</span>
         <button *ngIf="isLogged()" (click)="logout()" class="desktopLogout">
         <mat-icon>exit_to_app</mat-icon>

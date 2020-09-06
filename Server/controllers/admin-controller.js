@@ -48,7 +48,7 @@ router.delete("/deleteProduct/:_id", checkAdmin, async(request, response) => {
         const product = await adminLogic.getOneItem(_id);
         console.log(product.productImg)
         if (product.productImg != 'noImageEntered') {
-            fs.unlink(`./uploads/${product.productImg}`, (err) => {
+            fs.unlink(`./uploads/product-imgs/${product.productImg}`, (err) => {
                 if (err) {
                     console.error(err)
                 }
@@ -75,7 +75,7 @@ router.post("/addProduct", checkAdmin, async(request, response) => {
             const extension = image.name.substr(image.name.lastIndexOf('.'))
             const newFileName = uuid.v4() + extension;
             product.productImg = newFileName
-            image.mv("./uploads/" + newFileName)
+            image.mv("./uploads/product-imgs/" + newFileName)
         }
         const newProduct = await adminLogic.addProductToStore(product);
         response.status(201).json({ newProduct });
@@ -101,7 +101,7 @@ router.put("/update/:_id", checkAdmin, async(request, response) => {
             const extension = image.name.substr(image.name.lastIndexOf('.'))
             const newFileName = uuid.v4() + extension;
             product.productImg = newFileName
-            image.mv("./uploads/" + newFileName)
+            image.mv("./uploads/product-imgs/" + newFileName)
         }
 
         const updatedProduct = await adminLogic.updateProduct(product);
@@ -109,7 +109,6 @@ router.put("/update/:_id", checkAdmin, async(request, response) => {
             response.sendStatus(404);
             return;
         }
-        console.log(updatedProduct)
         response.json(updatedProduct);
     } catch (err) {
         response.status(500).send(err.message);
@@ -121,12 +120,21 @@ router.patch("/update/:_id", checkAdmin, async(request, response) => {
     try {
         const product = new Product(JSON.parse(request.body.info));
         product._id = request.params._id;
+        console.log(product.productImg)
+        if (product.productImg !== 'noImageEntered' && request.files) {
+            fs.unlink(`./uploads/product-imgs/${product.productImg}`, (err) => {
+                if (err) {
+                    console.error(err)
+                }
+                console.log(`${product.productImg} has been deleted`)
+            })
+        }
         if (request.files) {
             const image = request.files.file;
             const extension = image.name.substr(image.name.lastIndexOf('.'))
             const newFileName = uuid.v4() + extension;
             product.productImg = newFileName
-            image.mv("./uploads/" + newFileName)
+            image.mv("./uploads/product-imgs/" + newFileName)
         }
         const updatedProduct = await adminLogic.updateProduct(product);
         if (!updatedProduct) {

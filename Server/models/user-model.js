@@ -52,6 +52,10 @@ const userSchema = mongoose.Schema({
         zip: Number
     },
 
+    profileImg: {
+        type: String
+    },
+
     isAdmin: String
 }, {
     versionKey: false

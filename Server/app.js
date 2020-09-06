@@ -1,10 +1,13 @@
 let origin;
-if (process.env.NODE_ENV === "production") {
-    global.config = require('./config.prod.json');
-    origin = 'http://localhost:4200'
+let fileOrigin;
+if (process.env.PORT) {
+    origin = 'https://sky-buy.azurewebsites.net';
+    global.config = require("./config.prod.json");
+    fileOrigin = "./_front-end";
 } else {
-    global.config = require('./config.dev.json');
-    origin = 'http://localhost:4200'
+    origin = 'http://localhost:4200';
+    global.config = require("./config.dev.json");
+    fileOrigin = "./"
 }
 require("./data-access-layer/dal");
 const express = require('express');
@@ -22,10 +25,14 @@ server.use(cors({
 }));
 
 server.use(fileUpload());
-server.use(express.static(path.join(__dirname, "./")));
+server.use(express.static(path.join(__dirname, fileOrigin)));
+
 server.use(express.json());
 server.use('/api/auth', authController);
 server.use('/api/admin', adminController);
 server.use('/api/user', userController);
-server.use('*', (request, response) => response.sendStatus(404));
-server.listen(3000, () => console.log("Listening on http://localhost:3000"));
+server.use("*", (request, response) => {
+    response.sendFile(path.join(__dirname, "./_front-end/index.html"));
+});
+const port = process.env.PORT || 3000;
+server.listen(port, () => console.log(`Listening on port ${port}`));

@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { PlaceOrderComponent } from '../place-order/place-order.component';
 import { Router } from '@angular/router';
-
+import {baseUrl} from 'src/environments/environment';
 @Component({
   selector: 'app-review-order',
   templateUrl: './review-order.component.html',
@@ -27,9 +27,10 @@ export class ReviewOrderComponent implements OnInit, OnDestroy {
   public timer:boolean;
   public cart:CartModel;
   public userInfo:UserModel = JSON.parse(localStorage.getItem("userInfo"));
-  public totalPrice:number = parseInt(sessionStorage.getItem('total'));
+  public totalPrice:number =  store.getState().totalToPay;
   public completedOrder:OrderModel;
-
+  public cardIcon:string;
+  public baseUrl = baseUrl;
 
   constructor(private dialog: MatDialog, private userServices:UserService,private _router:Router) { }
 
@@ -42,6 +43,7 @@ export class ReviewOrderComponent implements OnInit, OnDestroy {
       this.orderedProducts = store.getState().cartItems;
       this.cart = store.getState().cart;
       this.completedOrder = store.getState().order;
+      this.totalPrice =  store.getState().totalToPay;
     })
     this.order.addressCity = this.userInfo.address.city;
     this.order.addressStreet = this.userInfo.address.street;
@@ -56,9 +58,6 @@ export class ReviewOrderComponent implements OnInit, OnDestroy {
             return;
           }
           this.userServices.getExistingItemsToCart(this.cart._id);
-          if(this.orderedProducts.length === 0){
-            this._router.navigate(['/home']);
-          }
       })
     }
   }
@@ -72,6 +71,8 @@ export class ReviewOrderComponent implements OnInit, OnDestroy {
   }
 
   public insertCredit(credit){
+    const firstDigit = credit.substr(0, 1);
+    this.cardIcon = `card${firstDigit}`;
     if(this.creditCardFormControl.valid){
       const lastDigits = credit.substr(credit.length - 4);
       this.order.lastFourDigitsOfCard = lastDigits;

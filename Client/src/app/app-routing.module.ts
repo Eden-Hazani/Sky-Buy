@@ -10,6 +10,8 @@ import { AlreadyLoggedService } from './services/already-logged.service';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { ReviewOrderComponent } from './components/review-order/review-order.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { AboutComponent } from './components/about/about.component';
+import { AccountComponent } from './components/account/account.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path:"order", component:PlaceOrderComponent, canActivate:[LoginGuardService]},
   {path:"reviewOrder",component:ReviewOrderComponent, canActivate:[LoginGuardService]},
   {path:"orderHistory",component:OrderHistoryComponent,canActivate:[LoginGuardService]},
+  {path:"about",component:AboutComponent,canActivate:[LoginGuardService]},
+  {path:"account",component:AccountComponent,canActivate:[LoginGuardService]},
   {path:"",redirectTo:"/home",pathMatch:"full"}
 ];
 

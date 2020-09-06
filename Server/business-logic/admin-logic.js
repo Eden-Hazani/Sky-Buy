@@ -10,7 +10,6 @@ function addProductToStore(product) {
 }
 
 async function updateProduct(productToUpdate) {
-    console.log(productToUpdate)
     const info = await Product.updateOne({ _id: productToUpdate._id }, productToUpdate).exec();
     return info.n ? productToUpdate : null;
 }

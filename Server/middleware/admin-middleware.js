@@ -23,6 +23,7 @@ async function checkIfAdmin(request, response, next) {
             return;
         }
         if (payload.user.isAdmin !== hash("Admin")) {
+            console.log(hash("Admin"))
             response.status(403).send("Not An Admin!")
             return;
         }

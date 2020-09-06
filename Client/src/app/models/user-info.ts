@@ -7,8 +7,9 @@ export class UserModel {
         public firstName?:string,
         public lastName?:string,
         public IdentificationNumber?:number,
-        public address?: AddressModel
-        ,public isAdmin?:string
+        public address?: AddressModel,
+        public profileImg?:string,
+        public isAdmin?:string
         ){
             if(!address){
                 this.address = new AddressModel();

@@ -36,13 +36,13 @@
     <h1>Here you can choose an existing item in order to modify or delete it</h1>
 
     <div class="product" *ngFor="let product of products">
-        <div class="productImages" style="background-image: url(http://localhost:3000/uploads/{{product.productImg}});"></div>
+        <div class="productImages" style="background-image: url({{baseUrl}}/uploads/product-imgs/{{product.productImg}});"></div>
         <p>{{product.productName}}</p>
         <br>
         <p>{{product.productDescription}}</p>
         <span>{{product.productPrice}} &#8362;</span>
         <br>
-        <button mat-button (click)="openDialogModify(product._id)">Modify Product</button>
+        <button mat-button (click)="openDialogModify(product._id,product.productImg)">Modify Product</button>
         <span>|</span>
         <button mat-button (click)="deleteItem(product._id)">Delete Product</button>
     </div>

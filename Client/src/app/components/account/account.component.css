@@ -1,0 +1,47 @@
+h1 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #05386B;
+    font-size: 30px;
+}
+
+.profileImg {
+    width: 120px;
+    height: 120px;
+    border-radius: 80px;
+    background-size: cover;
+    margin: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid rgba(128, 128, 128, 0.438);
+}
+
+.imgUpload {
+    width: 120px;
+    height: 120px;
+    border-radius: 80px;
+}
+
+.imgUpload:hover {
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.151);
+}
+
+.changeInfo {
+    background-color: rgba(255, 255, 255, 0.801);
+    padding: 25px;
+    padding-bottom: 50px;
+    width: 55%;
+    margin: auto;
+}
+
+.example-full-width {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #05386B;
+    margin: 15px;
+}
+
+form>* {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #05386B;
+    font-size: 20px;
+}

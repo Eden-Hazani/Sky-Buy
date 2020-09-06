@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http' 
 import { ActionType } from '../redux/actionType';
 import { store } from '../redux/store';
-import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import {baseUrl} from 'src/environments/environment' 
+
 
 
 @Injectable({
@@ -23,7 +23,7 @@ export class AdminService {
     let formData: FormData = new FormData();
     formData.append("file", fileToUpload ,fileToUpload.name);
     formData.append("info",JSON.stringify(product))
-    return this.http.post("http://localhost:3000/api/admin/addProduct",formData,
+    return this.http.post(baseUrl+"api/admin/addProduct",formData,
     {headers:this.headers}).subscribe(productInfo=>{
       const action = { type: ActionType.AddProduct, payload: productInfo };
       store.dispatch(action);
@@ -31,20 +31,21 @@ export class AdminService {
   }
 
   public deleteProduct(_id){
-    return this.http.delete(`http://localhost:3000/api/admin/deleteProduct/${_id}`,{headers:this.headers}).subscribe(()=>{
+    return this.http.delete(`${baseUrl}api/admin/deleteProduct/${_id}`,{headers:this.headers}).subscribe(()=>{
       const action = { type: ActionType.DeleteProduct, payload: _id };
       store.dispatch(action);
     });
   }
 
   public modifyProduct(product,fileToUpload: File){
+    console.log(product)
     let formData: FormData = new FormData();
     if(fileToUpload){
       formData.append("file", fileToUpload ,fileToUpload.name);
     } 
     formData.append("info",JSON.stringify(product));
-    this.http.patch(`http://localhost:3000/api/admin/update/${product._id}`,formData,{headers:this.headers}).toPromise().then(()=>{
-      return this.http.get(`http://localhost:3000/api/admin/getOneProduct/${product._id}`,{headers:this.headers}).subscribe(product=>{
+    this.http.patch(`${baseUrl}api/admin/update/${product._id}`,formData,{headers:this.headers}).toPromise().then(()=>{
+      return this.http.get(`${baseUrl}api/admin/getOneProduct/${product._id}`,{headers:this.headers}).subscribe(product=>{
         const action = { type: ActionType.ModifyProduct, payload: product };
         store.dispatch(action);
       })
@@ -52,10 +53,10 @@ export class AdminService {
   }
 
   public addCategory(category){
-    this.http.post(`http://localhost:3000/api/admin/postCategory`,category,{headers:this.headers}).toPromise();
+    this.http.post(`${baseUrl}api/admin/postCategory`,category,{headers:this.headers}).toPromise();
   }
 
   public getCategories(){
-    return this.http.get("http://localhost:3000/api/admin/getCategories",{headers:this.headers}).toPromise();
+    return this.http.get(`${baseUrl}api/admin/getCategories`,{headers:this.headers}).toPromise();
   }
 }

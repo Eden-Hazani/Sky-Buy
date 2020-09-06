@@ -1,0 +1,50 @@
+<h1>My Account</h1>
+
+
+<h3>Click on your picture to change it</h3>
+<div *ngIf="userInfo.profileImg !== 'noImageEntered'">
+    <div class="profileImg" style="background-image: url({{baseUrl}}uploads/profile-imgs/{{userInfo.profileImg}});">
+        <div class="imgUpload" (click)="fileInput.click()">
+            <input #fileInput type="file" (change)="handleFileInput($event.target.files)" style="display:none;" />
+        </div>
+    </div>
+</div>
+<div *ngIf="userInfo.profileImg === 'noImageEntered'">
+    <div class="profileImg">
+        <div class="imgUpload" (click)="fileInput.click()">
+            <input #fileInput type="file" (change)="handleFileInput($event.target.files)" style="display:none;" />
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="changeInfo">
+    <form (ngSubmit)="changeUserDetails()">
+        <h3>Change Password</h3>
+        <mat-form-field class="example-full-width">
+            <mat-label>Old Password</mat-label>
+            <input type="password" autocomplete="on" name="oldPassword" matInput [formControl]="oldPasswordFormControl" [errorStateMatcher]="matcher" placeholder="Old Password" [(ngModel)]="oldPassword">
+            <mat-error *ngIf="oldPasswordFormControl.hasError('required')">
+                Old Password is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>New password</mat-label>
+            <input type="password" autocomplete="on" name="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" placeholder="Must be a strong password" [(ngModel)]="newUserInfo.password">
+            <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+                Password must be above 5 characters
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
+                Password cannot be above 12 characters
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+                Must contain - Two uppercase letters, three lowercase letters and two numbers.
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Password is required
+            </mat-error>
+        </mat-form-field>
+        <br>
+        <button mat-button type="submit">Submit</button>
+    </form>
+    <br>
+</div>

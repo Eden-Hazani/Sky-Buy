@@ -10,6 +10,8 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {CategoryModel} from '../../models/category-model'
 import swal from 'sweetalert2';
 import { AddProductComponent } from '../add-product/add-product.component';
+import {baseUrl} from 'src/environments/environment'
+import { ProductModel } from 'src/app/models/product-model';
 
 @Component({
   selector: 'app-admin-zone',
@@ -19,9 +21,10 @@ import { AddProductComponent } from '../add-product/add-product.component';
 export class AdminZoneComponent implements OnInit,OnDestroy  {
 
   private unsubscribe: Unsubscribe;
-  public products;
+  public products:ProductModel[];
   public timer = false
   public newCategory = new CategoryModel();
+  public baseUrl = baseUrl;
 
   constructor(private dialog: MatDialog, private userServices:UserService,private adminService:AdminService) { }
   ngOnDestroy(){
@@ -45,10 +48,11 @@ export class AdminZoneComponent implements OnInit,OnDestroy  {
     this.products = store.getState().products
   }
 
-  public openDialogModify(product_id){
+  public openDialogModify(product_id,productImg){
     this.dialog.open(ModifyProductComponent,{
       data:{
-        _id:product_id
+        _id:product_id,
+        productImg:productImg
         }
       });
   }

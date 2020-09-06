@@ -30,6 +30,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { AlreadyLoggedService } from './services/already-logged.service';
+import { AboutComponent } from './components/about/about.component';
+import { AccountComponent } from './components/account/account.component';
+
+
 
 
 @NgModule({
@@ -45,6 +49,8 @@ import { AlreadyLoggedService } from './services/already-logged.service';
     PlaceOrderComponent,
     ReviewOrderComponent,
     OrderHistoryComponent,
+    AboutComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +70,7 @@ import { AlreadyLoggedService } from './services/already-logged.service';
     SweetAlert2Module.forRoot(),
     MatSliderModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
     ],
   providers: [
     LoginGuardService,

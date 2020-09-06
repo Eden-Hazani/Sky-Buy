@@ -1,7 +1,6 @@
 {
     "mongodb": {
-        "host": "localhost",
-        "database": "skyBuy"
+        "connectionString": "mongodb://localhost:27017/skyBuy"
     },
     "jwt": {
         "secretKey": "da88ac8a-32ec-4054-8cc3-2c0e02c087e3"

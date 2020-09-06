@@ -197,7 +197,17 @@ h6 {
 .itemContainer {
     margin-top: 10px;
     overflow-y: auto;
-    height: 480px;
+    height: 900px;
+}
+
+.itemContainer::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+.itemContainer::-webkit-scrollbar-thumb {
+    background-color: #379683;
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent)
 }
 
 .productNavBar {
@@ -211,6 +221,55 @@ h6 {
 .mobileItemMenuButton {
     display: none;
     padding: 15px;
+}
+
+.showMess {
+    position: absolute !important;
+    top: 10%;
+    padding: 25px;
+    background-color: rgba(128, 128, 128, 0.425);
+    color: #05386B;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 25px;
+    animation-name: showShopMessage;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.hideMess {
+    position: absolute !important;
+    top: 10%;
+    padding: 25px;
+    background-color: rgba(128, 128, 128, 0.425);
+    color: #05386B;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 25px;
+    animation-name: hideShopMessage;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.shopMess {
+    display: none;
+}
+
+@keyframes showShopMessage {
+    from {
+        right: -10%;
+    }
+    to {
+        right: 0px;
+    }
+}
+
+@keyframes hideShopMessage {
+    from {
+        right: 0px;
+    }
+    to {
+        right: -20%;
+        opacity: 0;
+    }
 }
 
 @media screen and (max-width: 1300px) {

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 function connectAsync() {
     return new Promise((resolve, reject) => {
-        const connStr = `mongodb://${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.database}`;
+        const connStr = config.mongodb.connectionString;
 
         const options = { useNewUrlParser: true, useUnifiedTopology: true };
 
@@ -20,6 +20,5 @@ function connectAsync() {
 (async() => {
     try {
         const db = await connectAsync();
-        console.log(`connected to ${db.name}`);
     } catch (err) { console.log(err); }
 })();

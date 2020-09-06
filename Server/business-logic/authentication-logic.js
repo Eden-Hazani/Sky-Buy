@@ -20,11 +20,22 @@ function login(credentials) {
     return user
 }
 
+async function changeUserInfo(userToUpdate) {
+    if (userToUpdate.password) {
+        userToUpdate.password = hash(userToUpdate.password);
+    }
+    const info = await User.updateOne({ _id: userToUpdate._id }, userToUpdate).exec();
+    return info.n ? userToUpdate : null;
+}
+
+
+
 
 
 
 module.exports = {
     validateRegister,
     register,
-    login
+    login,
+    changeUserInfo
 }

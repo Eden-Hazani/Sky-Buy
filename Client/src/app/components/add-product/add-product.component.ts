@@ -15,7 +15,7 @@ export class AddProductComponent implements OnInit {
   public timer = false;
   public preSelected = '';
   public categories;
-  fileToUpload: File = null;
+  public fileToUpload: File = null;
 
 
   constructor(private adminServices:AdminService) { }

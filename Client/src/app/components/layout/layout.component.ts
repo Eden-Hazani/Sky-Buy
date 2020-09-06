@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Unsubscribe } from 'redux';
 import { store } from 'src/app/redux/store';
 import { UserModel } from 'src/app/models/user-info';
+import {baseUrl} from 'src/environments/environment';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +16,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   public adminAnswer;
   public userInfo:UserModel
   private unsubscribe: Unsubscribe;
-
+  public baseUrl = baseUrl;
 
   constructor(private _router:Router, private userServices:UserService) { }
 

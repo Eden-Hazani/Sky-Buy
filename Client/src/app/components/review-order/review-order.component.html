@@ -5,13 +5,15 @@
 <div *ngIf="timer">
     <div class="orderContainer">
         <h3>Review Your Order</h3>
-        <div class="product" *ngFor="let product of orderedProducts">
-            <div class="productImages" style="background-image: url(http://localhost:3000/uploads/{{product.productId.productImg}});"></div>
-            <p class="pName">{{product.productId.productName}}</p>
-            <br>
-            <p class="pDescription">{{product.productId.productDescription}}</p>
-            <p class="pAmount">Amount: {{product.amount}}</p>
-            <span>{{product.totalPrice}} &#8362;</span>
+        <div class="productContainer">
+            <div class="product" *ngFor="let product of orderedProducts">
+                <div class="productImages" style="background-image: url({{baseUrl}}/uploads/product-imgs/{{product.productId.productImg}});"></div>
+                <p class="pName">{{product.productId.productName}}</p>
+                <br>
+                <p class="pDescription">{{product.productId.productDescription}}</p>
+                <p class="pAmount">Amount: {{product.amount}}</p>
+                <span>{{product.totalPrice}} &#8362;</span>
+            </div>
         </div>
     </div>
     <form class="OrderDetails" (ngSubmit)="submitOrder()">
@@ -48,6 +50,7 @@
             Cannot be today or past date.
         </mat-error>
         <br>
+        <span class={{cardIcon}}></span>
         <mat-form-field class="example-full-width">
             <mat-label>Enter Credit Card</mat-label>
             <input (input)="insertCredit($event.target.value)" required matInput [formControl]="creditCardFormControl" [errorStateMatcher]="matcher" type="number" inputmode="numeric" autocomplete="cc-number" placeholder="xxxx xxxx xxxx xxxx">

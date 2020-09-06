@@ -6,33 +6,73 @@
 .product {
     position: relative;
     overflow: hidden;
-    width: 200px;
-    height: 200px;
-    display: inline-block;
+    height: 65px;
     margin: 15px;
     background-color: rgba(255, 255, 255, 0.801);
     padding: 15px;
     overflow: hidden;
+    margin-left: 15%;
 }
 
-.product>p {
-    margin: 0px;
+.pName {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+
+.pDescription {
+    right: 20%;
+    top: 15px;
+    left: 20%;
+    position: absolute;
+}
+
+.productContainer {
+    height: 900px;
+    overflow-y: auto;
 }
 
 .productImages {
-    width: 100px;
-    height: 80px;
-    margin: auto;
-    background-size: 80%;
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+    background-size: 100%;
     background-position: center;
     border-radius: 30px;
     background-repeat: no-repeat;
+}
+
+.pAmount {
+    position: absolute;
+    right: 5%;
+    top: 10%;
+}
+
+.product>span {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    font-size: 25px !important;
+}
+
+.product>p,
+.product>span {
+    margin: 0px;
+    color: #05386B;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 15px;
 }
 
 .orderContainer {
     width: 45%;
     display: inline-block;
     margin-right: 100%;
+}
+
+.orderContainer>h3 {
+    color: #05386B;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 25px;
 }
 
 .OrderDetails {
@@ -52,6 +92,7 @@
 
 .OrderDetails>h3 {
     margin-bottom: 60px;
+    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .sendOrder {
@@ -60,45 +101,45 @@
     margin-bottom: 15px;
 }
 
-@media screen and (max-width: 1150px) {
-    .product {
-        position: relative;
-        overflow: hidden;
-        width: 360px;
-        height: 40px;
-        display: inline-block;
-        margin: 15px;
-        background-color: rgba(255, 255, 255, 0.801);
-        padding: 15px;
-        overflow: hidden;
-    }
-    .pName {
-        position: absolute;
-        top: 0px;
-        right: 65%;
-    }
-    .pDescription {
-        right: 35%;
-        top: 25px;
-        position: absolute;
-    }
-    .productImages {
-        width: 50px;
-        height: 50px;
-        background-size: 100%;
-        background-position: center;
-        border-radius: 30px;
-        background-repeat: no-repeat;
-        margin: 0px;
-    }
-    .pAmount {
-        position: absolute;
-        bottom: 0px;
-        right: 110px;
-    }
-    .product>span {
-        position: absolute;
-        bottom: 0px;
-        right: 10%;
-    }
+.productContainer::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+.productContainer::-webkit-scrollbar-thumb {
+    background-color: #379683;
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent)
+}
+
+.card4 {
+    display: inline-block;
+    background-image: url(/assets/images-and-gifs/visa-card.svg);
+    width: 35px;
+    background-size: 35px;
+    height: 35px;
+    vertical-align: middle;
+    position: absolute;
+    left: 30%;
+}
+
+.card3 {
+    display: inline-block;
+    background-image: url('/assets/images-and-gifs/diners-club-card.svg');
+    width: 35px;
+    background-size: 35px;
+    height: 35px;
+    vertical-align: middle;
+    position: absolute;
+    left: 30%;
+}
+
+.card5 {
+    display: inline-block;
+    background-image: url('/assets/images-and-gifs/mastercard-card.svg');
+    width: 35px;
+    background-size: 35px;
+    height: 35px;
+    vertical-align: middle;
+    position: absolute;
+    left: 30%;
 }

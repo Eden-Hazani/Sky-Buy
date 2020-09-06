@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit  {
   public preSelected = '';
   public startTimer = false;
   public secondStage = false;
+  public fileToUpload: File = null;
 
   constructor( private userServices:UserService, private _router:Router) { }
 
@@ -45,7 +46,9 @@ export class RegisterComponent implements OnInit  {
       return null;
   }
 
- 
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+  }
 
   async validateFirstStage(){
     if(!this.validFirstStage()){
@@ -81,7 +84,7 @@ export class RegisterComponent implements OnInit  {
       if(!this.validForm()){
         return;
       }
-      this.userInfo = await this.userServices.register(this.newUser);
+      this.userInfo = await this.userServices.register(this.newUser,this.fileToUpload);
     }catch(err){
       if(err.status === 403){
         swal.fire({
@@ -143,7 +146,7 @@ export class RegisterComponent implements OnInit  {
     Validators.required,
     Validators.minLength(9),
     Validators.maxLength(9),
-    Validators.min(1)
+    Validators.pattern("^(0|[1-9][0-9]*)$")
   ])
 
   addressCityFormControl = new FormControl('',[

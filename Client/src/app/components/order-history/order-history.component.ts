@@ -15,7 +15,7 @@ import { PdfGenService } from 'src/app/services/pdf-gen.service';
 export class OrderHistoryComponent implements OnInit, OnDestroy {
 
   private unsubscribe: Unsubscribe;
-  public orders:OrderModel[];
+  public orders:OrderModel[] = [];
   public timer:boolean = false;
   public pickedOrderItems:CartItemModel[];
   public pickedOrder:OrderModel;

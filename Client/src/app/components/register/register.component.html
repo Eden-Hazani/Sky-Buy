@@ -47,7 +47,7 @@
         <br>
         <mat-form-field class="example-full-width">
             <mat-label>Identification Number</mat-label>
-            <input type="number" matInput [formControl]="IdentificationNumberFormControl" name="IdentificationNumber" [errorStateMatcher]="matcher" placeholder="Ex. 123456789" [(ngModel)]="newUser.IdentificationNumber">
+            <input type="text" matInput [formControl]="IdentificationNumberFormControl" name="IdentificationNumber" [errorStateMatcher]="matcher" placeholder="Ex. 123456789" [(ngModel)]="newUser.IdentificationNumber">
             <mat-error *ngIf="IdentificationNumberFormControl.hasError('minlength')">
                 Illegal ID
             </mat-error>
@@ -57,11 +57,14 @@
             <mat-error *ngIf="IdentificationNumberFormControl.hasError('required')">
                 ID is required.
             </mat-error>
-            <mat-error *ngIf="IdentificationNumberFormControl.hasError('min')">
-                Illegal ID
+            <mat-error *ngIf="IdentificationNumberFormControl.hasError('pattern')">
+                No letters allowed
             </mat-error>
         </mat-form-field>
         <br>
+        <h3>Optional Profile Image:</h3>
+        <button mat-button><input type="file" id="file" (change)="handleFileInput($event.target.files)" name="profileImg" accept="image/*" /></button>
+        <br><br>
         <button mat-button (click)="validateFirstStage()">Next</button>
     </div>
     <div class="secondStage" *ngIf="secondStage">
