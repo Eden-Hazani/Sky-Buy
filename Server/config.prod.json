@@ -1,6 +1,7 @@
 {
     "mongodb": {
-        "connectionString": "mongodb://skybuy:faxsmoWdIjokoi115zp2i8rNVRdDdtGrc8Y9zTpBR5c62XhxHYCi2hdkEkDN3mfzYBA71he2yAyPGQhQ9r5YxA==@skybuy.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@skybuy@"
+        //get connection string from azure
+        "connectionString": ""
     },
     "jwt": {
         "secretKey": "da88ac8a-32ec-4054-8cc3-2c0e02c087e3"
