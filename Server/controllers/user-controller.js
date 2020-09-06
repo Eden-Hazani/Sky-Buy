@@ -90,7 +90,6 @@ router.get("/getProducts", verifiedLoggedIn, async(request, response) => {
 router.delete("/removeCart/:_id", async(request, response) => {
     try {
         const cart = request.params._id;
-        console.log(cart)
         await userLogic.clearCart(cart);
         response.sendStatus(204);
     } catch (err) {
@@ -120,7 +119,6 @@ router.post("/addItemToCart/:cart_id/:product_id", async(request, response) => {
             response.status(400).send(error.message)
         }
         const updatedCart = await userLogic.addItemToCart(item);
-        console.log(updatedCart.productId)
         response.json({ updatedCart })
     } catch (err) {
         response.status(500).send(errorHandler.getError(err));

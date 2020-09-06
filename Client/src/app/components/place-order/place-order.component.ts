@@ -23,7 +23,6 @@ export class PlaceOrderComponent implements OnInit {
   //opens a dialog window with a timer,
   //after timer runs out a receipt is represented to the user.
   ngOnInit(): void {
-    console.log(this.data)
     this.correctDate = this.data.order.addedOrder.shippingDate
       .substring(0, this.data.order.addedOrder.shippingDate.indexOf('T'));
       setInterval(() => {
@@ -33,7 +32,6 @@ export class PlaceOrderComponent implements OnInit {
         this.timer = this.timer - 1;
       }, 1000);
       setTimeout(() => {
-        console.log(this.data)
         this.pdfGen.generatePdf(this.data.order.addedOrder,this.data.products);
         this.userServices.completeOrder(this.data.cart);
         this._router.navigate(['/home'])

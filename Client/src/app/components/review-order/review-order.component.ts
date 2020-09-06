@@ -37,7 +37,6 @@ export class ReviewOrderComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     setTimeout(() => {
       this.timer = true
-      console.log(this.cart)
     }, 2000);
     this.unsubscribe = store.subscribe(()=>{
       this.orderedProducts = store.getState().cartItems;
@@ -122,7 +121,6 @@ export class ReviewOrderComponent implements OnInit, OnDestroy {
         }
       }
     }
-    console.log(date <= new Date());
     return null;
      
  }

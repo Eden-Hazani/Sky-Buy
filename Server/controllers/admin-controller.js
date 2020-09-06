@@ -46,7 +46,6 @@ router.delete("/deleteProduct/:_id", checkAdmin, async(request, response) => {
     try {
         const _id = request.params._id;
         const product = await adminLogic.getOneItem(_id);
-        console.log(product.productImg)
         if (product.productImg != 'noImageEntered') {
             fs.unlink(`./uploads/product-imgs/${product.productImg}`, (err) => {
                 if (err) {
@@ -120,7 +119,6 @@ router.patch("/update/:_id", checkAdmin, async(request, response) => {
     try {
         const product = new Product(JSON.parse(request.body.info));
         product._id = request.params._id;
-        console.log(product.productImg)
         if (product.productImg !== 'noImageEntered' && request.files) {
             fs.unlink(`./uploads/product-imgs/${product.productImg}`, (err) => {
                 if (err) {
