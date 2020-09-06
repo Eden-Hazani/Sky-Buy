@@ -20,7 +20,8 @@ export class PlaceOrderComponent implements OnInit {
 
   constructor(private pdfGen:PdfGenService, private userServices:UserService,@Inject (MAT_DIALOG_DATA) public data: any,private _router:Router) { }
 
-
+  //opens a dialog window with a timer,
+  //after timer runs out a receipt is represented to the user.
   ngOnInit(): void {
     console.log(this.data)
     this.correctDate = this.data.order.addedOrder.shippingDate

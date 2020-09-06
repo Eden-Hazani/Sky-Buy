@@ -23,6 +23,8 @@ export class OrderHistoryComponent implements OnInit, OnDestroy {
 
   constructor(private userServices:UserService, private pdfService:PdfGenService) { }
 
+
+  //get all related (finished) orders of the user
   ngOnInit() {
     setTimeout(() => {
       this.timer = true;
@@ -36,6 +38,7 @@ export class OrderHistoryComponent implements OnInit, OnDestroy {
     this.unsubscribe()
   }
 
+  //gets order information from the DB
   public openOrder(order){
     this.orderSwitch = true;
     setTimeout(() => {

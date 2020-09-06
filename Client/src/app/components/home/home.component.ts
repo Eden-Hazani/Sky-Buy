@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit,OnDestroy {
 
 
   // This controls searching with categories picked and without categories picked,
-  // If the user selected categories manually and THEN searched the resulting items will 
+  // If the user selected categories manually and THEN searched, the resulting items will 
   // always be within the related categories.
   public async searchItem(text){
     if (text.trim() === "") {
@@ -83,6 +83,9 @@ export class HomeComponent implements OnInit,OnDestroy {
     })
   }
 
+  //Checks the server for existing cart.
+  //if a cart exists it pulls all the related items 
+  //if no cart exists it creates a new cart 
   public async getCartItems(){
     if(this.cart){
       return;

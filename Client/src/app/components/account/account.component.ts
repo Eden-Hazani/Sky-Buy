@@ -54,8 +54,8 @@ export class AccountComponent implements OnInit {
   public isValid(){
     return this.passwordFormControl.valid
   }
-
-  public isOldPassValid(){
+     //validates old password with the server
+public isOldPassValid(){
     const userName = this.userInfo.usernameEmail;
     const pass = this.oldPassword;
     return this.userService.validateUser(userName,pass).then(answer=>{
@@ -68,7 +68,7 @@ export class AccountComponent implements OnInit {
       return false;
     })
   }
-
+  //uploads the file to the server
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
     swal.fire({

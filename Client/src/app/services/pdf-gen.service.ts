@@ -41,7 +41,7 @@ export class PdfGenService {
     ] };
     pdfMake.createPdf(documentDefinition).open();
    }
-
+   //adds image to the pdf file.
    getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
       let img = new Image();

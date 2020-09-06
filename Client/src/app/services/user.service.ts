@@ -21,6 +21,7 @@ export class UserService {
 
   constructor(private http:HttpClient,private _router:Router) { }
 
+  //admin check for store, also logs out any user with an expired session
   public isAdmin(){
     const headers = new HttpHeaders().set("authorization", "Bearer " + localStorage.getItem("token"));
     return this.http.get(`${baseUrl}api/auth/is-admin`,{headers:headers})
@@ -41,14 +42,14 @@ export class UserService {
         }}
       ,()=>{});
   }
-  // login check
+  // login check for the login canActivate
   public loginGuard(){
     const headers = new HttpHeaders().set("authorization", "Bearer " + localStorage.getItem("token"));
     return this.http.get(`${baseUrl}api/auth/is-loggedIn`,{headers:headers}).toPromise();
   }
 
 
-  // admin check for routing purposes
+  // admin check for admin canActivate
   public adminGuard(){
     const headers = new HttpHeaders().set("authorization", "Bearer " + localStorage.getItem("token"));
     return this.http.get(`${baseUrl}api/auth/is-admin`,{headers:headers}).toPromise();
@@ -87,11 +88,13 @@ export class UserService {
     })
   }
 
+  //validate user existing in DB
   public validateUser(username,password){
     const credentials = new UserModel(null,username,password)
     return this.http.post(`${baseUrl}api/auth/validUserInfo`,credentials,{headers:this.headers}).toPromise();
   }
 
+  //validates an existing username in DB for registration 
   public validateRegister(userName){
     return this.http.get(`${baseUrl}api/auth/validateInfo/${userName}`).toPromise()
   }
