@@ -63,7 +63,6 @@ export class AdminZoneComponent implements OnInit,OnDestroy  {
 
   submitCategory(){
     try{
-      console.log(this.categoryFormControl.valid)
       if(!this.categoryFormControl.valid){
         swal.fire({
           title: 'Error',

@@ -38,7 +38,6 @@ export class AdminService {
   }
 
   public modifyProduct(product,fileToUpload: File){
-    console.log(product)
     let formData: FormData = new FormData();
     if(fileToUpload){
       formData.append("file", fileToUpload ,fileToUpload.name);

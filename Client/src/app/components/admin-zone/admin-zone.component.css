@@ -63,3 +63,17 @@
     background-position: left;
     border-radius: 30px;
 }
+
+
+
+@media screen and (max-width: 1300px) {
+    .addCategory {
+        position: relative;
+        background-color: white;
+        width: 70vw;
+        height: 70vw;
+        border-radius: 50%;
+        margin: auto;
+        margin-bottom: 40px;
+    }
+}

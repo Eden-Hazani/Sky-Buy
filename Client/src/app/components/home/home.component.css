@@ -285,6 +285,9 @@ h6 {
         top: 12%;
         width: 450px;
     }
+    .itemContainer{
+        height: 600px;
+    }
     .item {
         background-color: white;
     }
@@ -382,7 +385,7 @@ h6 {
 
 @keyframes menuOpen900 {
     from {
-        right: -62%;
+        right: -70%;
     }
     to {
         right: 0%;
@@ -394,7 +397,7 @@ h6 {
         right: 0%;
     }
     to {
-        right: -62%;
+        right: -70%;
     }
 }
 
@@ -403,13 +406,13 @@ h6 {
         right: 0%;
     }
     to {
-        right: 45%;
+        right: 70%;
     }
 }
 
 @keyframes buttonMoveClose {
     from {
-        right: 45%;
+        right: 70%;
     }
     to {
         right: 0%;

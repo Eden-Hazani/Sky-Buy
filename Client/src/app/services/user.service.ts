@@ -76,7 +76,6 @@ export class UserService {
   }
 
   public changeUserInformation(user:UserModel,fileToUpload:File){
-    console.log(user)
     let formData: FormData = new FormData();
     if(fileToUpload){
       formData.append("file", fileToUpload ,fileToUpload.name);
@@ -108,7 +107,6 @@ export class UserService {
     formData.append("info",JSON.stringify(userInfo))
     return this.http.post(`${baseUrl}api/auth/register`,formData).subscribe(userAnswer=>{
       const action = { type: ActionType.LoadUserInfo, payload: userAnswer };
-      console.log(userAnswer)
       store.dispatch(action);
       this.headers = new HttpHeaders().set("authorization", "Bearer " + localStorage.getItem("token"));
       this.isAdmin()
