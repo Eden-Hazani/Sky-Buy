@@ -3,6 +3,5 @@
         "node_modules{,/**}",
         ".vscode{,/**}"
     ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/63cde5c7-3ad7-4327-8ef5-a01fe28efeb2/resourceGroups/SkyBuy/providers/Microsoft.Web/sites/Sky-Buy",
     "appService.deploySubpath": "."
 }
